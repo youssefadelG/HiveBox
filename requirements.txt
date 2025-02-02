@@ -1,1 +1,3 @@
 # required packages
+flask
+requests

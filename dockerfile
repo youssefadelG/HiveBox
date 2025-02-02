@@ -7,10 +7,10 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app
-COPY . /app
+COPY requirements.txt /app/
 
 # Install any necessary dependencies
-#RUN pip install --no-cache-dir -r ./requirements.txt
+RUN pip3 install --no-cache-dir -r /app/requirements.txt
 
 # Run the Python script when the container starts
-CMD ["python3", "main.py"]
+CMD ["python3", "app.py"]
