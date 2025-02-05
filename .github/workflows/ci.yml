@@ -41,9 +41,9 @@ jobs:
         run: |
           docker build -t hivebox:v0.0.1 .
 
-      - name: Set up OpenSSF ScoreCard
-        uses: openssf/scorecard-action@v1
-        id: scorecard
-        with:
-          results_file: results.sarif
+      # - name: Set up OpenSSF ScoreCard
+      #   uses: openssf/scorecard-action@v1
+      #   id: scorecard
+      #   with:
+      #     results_file: results.sarif
       
