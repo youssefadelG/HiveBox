@@ -1,1 +1,5 @@
 # required packages
+# required packages
+flask==3.1.0
+requests==2.32.3
+flake8==4.0.1
