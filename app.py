@@ -2,7 +2,6 @@ from flask import Flask, jsonify
 import requests
 from datetime import datetime, timedelta, timezone
 
-app = Flask(__name__)
 
 APP_VERSION = "v0.0.1"
 API_URL = "https://api.opensensemap.org"
@@ -23,17 +22,25 @@ def get_time_now():
 
 
 def launch_app():
-    @app.route('/')
+    app = Flask(__name__)
+    
+    @app.route("/")
     def home():
         """Return a friendly message"""
-        return "<p>Welcome to HiveBox API!</p>"
+        response = jsonify({"msg": 'Welcome to Youssef HiveBox API!'})
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.status_code = 200
+        return response, 200
 
-    @app.route('/version')
+    @app.route("/version")
     def get_version():
         """Return the version of the API"""
-        return jsonify({'version': APP_VERSION})
+        response = jsonify({"msg": f"Current version of the API is {APP_VERSION}"})
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.status_code = 200
+        return response, 200
 
-    @app.route('/temperature')
+    @app.route("/temperature")
     def get_average_temperature():
         """Return the average temperature for all boxes in the past hour"""
         try:
@@ -58,6 +65,7 @@ def launch_app():
                 if temperatures:
                     # print(temperatures)
                     average_temperature = sum(temperatures) / len(temperatures)
+                    response.status_code = 200
                     return jsonify({'average_temperature':
                                     f"{average_temperature:.2f} °C"})
                 else:
@@ -68,11 +76,12 @@ def launch_app():
         except requests.exceptions.RequestException as e:
             return jsonify({'error': f"API request failed: {str(e)}"}), 500
 
+    return app
 
 if __name__ == "__main__":
 
     # Run the Flask application
-    launch_app()
+    app = launch_app()
     app.run(debug=True, host='0.0.0.0', port=5000)
     # Adjust the host and port if needed
 # def version():
