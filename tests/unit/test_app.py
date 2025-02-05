@@ -1,12 +1,9 @@
 import pytest
-import os
-import sys
-from flask import Flask
-import json
 import requests
-from app import launch_app, get_time_now, one_hour_ago
+from app import launch_app
 
 APP_VERSION = "v0.0.1"
+
 
 @pytest.fixture
 def app():
@@ -15,6 +12,7 @@ def app():
         'TESTING': True
     })
     yield app
+
 
 @pytest.fixture
 def client(app):
@@ -26,10 +24,14 @@ def test_home(client):
     assert response.status_code == 200
     assert response.json == {'msg': 'Welcome to Youssef HiveBox API!'}
 
+
 def test_version(client):
     response = client.get('/version')
     assert response.status_code == 200
-    assert response.json == {'msg': f"Current version of the API is {APP_VERSION}"}
+    assert response.json == {
+        'msg': f"Current version of the API is {APP_VERSION}"
+        }
+
 
 def test_get_average_temperature(client, mocker):
     """Test the temperature endpoint"""
