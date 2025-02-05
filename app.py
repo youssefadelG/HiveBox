@@ -58,9 +58,8 @@ def launch_app():
                 if temperatures:
                     # print(temperatures)
                     average_temperature = sum(temperatures) / len(temperatures)
-                    return jsonify({'average_temperature': f"{
-                        average_temperature:.2f
-                        } °C"})
+                    return jsonify({'average_temperature':
+                                    f"{average_temperature:.2f} °C"})
                 else:
                     return jsonify({'error': 'No temperature received'}), 404
             else:
