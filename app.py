@@ -23,7 +23,7 @@ def get_time_now():
 
 def launch_app():
     app = Flask(__name__)
-    
+
     @app.route("/")
     def home():
         """Return a friendly message"""
@@ -35,7 +35,9 @@ def launch_app():
     @app.route("/version")
     def get_version():
         """Return the version of the API"""
-        response = jsonify({"msg": f"Current version of the API is {APP_VERSION}"})
+        response = jsonify({
+            "msg": f"Current version of the API is {APP_VERSION}"
+            })
         response.headers.add("Access-Control-Allow-Origin", "*")
         response.status_code = 200
         return response, 200
@@ -77,6 +79,7 @@ def launch_app():
             return jsonify({'error': f"API request failed: {str(e)}"}), 500
 
     return app
+
 
 if __name__ == "__main__":
 
