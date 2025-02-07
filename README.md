@@ -86,4 +86,4 @@ Continuous Integration
 The project uses GitHub Actions for continuous integration. The CI pipeline is defined in .github/workflows/ci.yml and includes steps for linting, building, and testing the code.
 
 ------------------------------------------------------------
-Thank you for checking out the HiveBox API! If you have any questions or feedback, feel free to reach out. Happy coding! 🎉
+Thank you for checking out the Youssef HiveBox API! If you have any questions or feedback, feel free to reach out. Happy coding! 🎉
