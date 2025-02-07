@@ -8,7 +8,6 @@ Welcome to the HiveBox API! This is a small side project that provides a RESTful
 - [Setup](#setup)
 - [Usage](#usage)
 - [Testing](#testing)
-- [License](#license)
 
 ## 🌟 Overview
 
