@@ -1,6 +1,6 @@
-# 🐝 HiveBox API
+# 🐝 Youssef HiveBox API
 
-Welcome to the HiveBox API! This is a small side project that provides a RESTful API for managing and retrieving data from HiveBox sensors. 🐝
+Welcome to Youssef HiveBox API! This is a small side project that provides a RESTful API for managing and retrieving data from HiveBox sensors all over the globe. 🐝
 
 ## 📚 Table of Contents
 
