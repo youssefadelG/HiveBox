@@ -56,4 +56,4 @@ def test_get_average_temperature(client, mocker):
     # Assert that the response status code is 200 (OK)
     assert rv.status_code == 200
     # Assert that the response JSON data matches the expected output
-    assert rv.json == {'average_temperature': '15.00 °C'}
+    assert rv.json == {'average_temperature': '15.00 °C ', 'status': 'Good'}
