@@ -21,7 +21,15 @@ def get_time_now():
     return datetime.now(timezone.utc).isoformat(
         timespec='milliseconds').replace("+00:00", "Z")
 
-
+def temp_status(temperature):
+    """Return the status of the temperature sensor"""
+    if temperature <= 10:
+        return "Too Cold"
+    elif temperature >= 37:
+        return "Too Hot"
+    else:
+        return "Good"
+    
 def launch_app():
     app = Flask(__name__)
 
@@ -69,8 +77,10 @@ def launch_app():
                     # print(temperatures)
                     average_temperature = sum(temperatures) / len(temperatures)
                     response.status_code = 200
-                    return jsonify({'average_temperature':
-                                    f"{average_temperature:.2f} °C"})
+                    return jsonify({
+                        'average_temperature': f"{average_temperature:.2f} °C",
+                        'status': temp_status(average_temperature)
+                    })
                 else:
                     return jsonify({'error': 'No temperature received'}), 404
             else:
