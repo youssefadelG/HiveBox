@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: hivebox-app
-          image: hivebox-app:latest
+          image: youssefmahdy/hivebox-app:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
           env:
