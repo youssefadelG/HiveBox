@@ -96,7 +96,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Terrascan Initialization
         run: |
-          mkdir -p ~/.terrascan
           terrascan init --config ~/.terrascan/config.yaml
       - name: Run Terrascan on Kubernetes manifests
         uses: tenable/terrascan-action@v1.4.1
