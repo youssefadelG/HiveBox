@@ -39,7 +39,7 @@ jobs:
       
       - name: Build Docker image
         run: |
-          docker build -t hivebox:v0.0.1 .
+          docker build --no-cache -t youssefmahdyhivebox-app:v0.0.1 .
 
       # - name: Set up OpenSSF ScoreCard
       #   uses: openssf/scorecard-action@v1

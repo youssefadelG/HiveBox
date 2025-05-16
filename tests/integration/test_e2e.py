@@ -3,9 +3,11 @@ import time
 import requests
 from app import launch_app
 
+
 def run_app():
     app = launch_app()
     app.run(port=5002)  # Use a test port to avoid conflicts
+
 
 def test_home_e2e():
     # Start the Flask app in a separate process

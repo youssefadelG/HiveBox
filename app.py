@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 import requests
 from datetime import datetime, timedelta, timezone
-#from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
+from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
 
 
 APP_VERSION = "v0.0.1"
