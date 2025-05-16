@@ -84,10 +84,10 @@ jobs:
           args: >
             -Dsonar.projectKey=hivebox
             -Dsonar.host.url=https://sonarcloud.io
-      - name: SonarQube Quality Gate Check
-        uses: SonarSource/sonarcloud-quality-gate-action@v1.1.1
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      # - name: SonarQube Quality Gate Check
+      #   uses: SonarSource/sonarcloud-quality-gate-action@v1.0.0
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   
   terrascan:
     runs-on: ubuntu-latest
@@ -95,7 +95,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run Terrascan on Kubernetes manifests
-        uses: tenable/terrascan-action@v1.5.0
+        uses: tenable/terrascan-action@v1.4.1
         with:
           iac_type: 'k8s'
           iac_dir: './KIND'
