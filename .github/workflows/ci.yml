@@ -39,7 +39,7 @@ jobs:
       
       - name: Build Docker image
         run: |
-          docker build --no-cache -t youssefmahdyhivebox-app:v0.0.1 .
+          docker build --no-cache -t youssefmahdy/hivebox-app:v0.0.1 .
         
       
       
@@ -85,7 +85,7 @@ jobs:
             -Dsonar.projectKey=hivebox
             -Dsonar.host.url=https://sonarcloud.io
       - name: SonarQube Quality Gate Check
-        uses: SonarSource/sonarcloud-quality-gate-action@master
+        uses: SonarSource/sonarcloud-quality-gate-action@v1.1.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   
@@ -95,7 +95,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run Terrascan on Kubernetes manifests
-        uses: accurics/terrascan-action@v1.3.2
+        uses: accurics/terrascan-action@v1.0.0
         with:
           iac_type: 'k8s'
           iac_dir: './KIND'
