@@ -77,7 +77,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: SonarQube Scan
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarcloud-github-action@v2.0.2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
@@ -85,7 +85,7 @@ jobs:
             -Dsonar.projectKey=hivebox
             -Dsonar.host.url=https://sonarcloud.io
       - name: SonarQube Quality Gate Check
-        uses: SonarSource/sonarcloud-quality-gate-action@v1.1.0
+        uses: SonarSource/sonarcloud-quality-gate-action@v1.1.1
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   
@@ -95,7 +95,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run Terrascan on Kubernetes manifests
-        uses: accurics/terrascan-action@v1.0.0
+        uses: tenable/terrascan-action@v1.5.0
         with:
           iac_type: 'k8s'
           iac_dir: './KIND'
