@@ -23,6 +23,21 @@ spec:
           env:
             - name: PORT
               value: "5000"
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "1500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+          SecurityContext:
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            AllowPrivilegeEscalation: false
 ---
 apiVersion: v1
 kind: Service
