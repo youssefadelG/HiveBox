@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hivebox-deploy
+  labels:
+    app: hivebox-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hivebox-app
+  template:
+    metadata:
+      labels:
+        app: hivebox-app
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: hivebox-app
+          image: youssefmahdy/hivebox-app@sha256:d64f04fdef085349b36a5e4c2327c7389c816364b3b54060668e3ae1755e2ef7
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          env:
+            - name: PORT
+              value: "5000"
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "1500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: / 
+              port: 5000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hivebox-service
+spec:
+  selector:
+    app: hivebox-app
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
