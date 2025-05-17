@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: hivebox-app
-          image: youssefmahdy/hivebox-app:v001
+          image: youssefmahdy/hivebox-app@sha256:d64f04fdef085349b36a5e4c2327c7389c816364b3b54060668e3ae1755e2ef7
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
@@ -30,7 +30,7 @@ spec:
             requests:
               memory: "256Mi"
               cpu: "250m"
-          SecurityContext:
+          securityContext:
             capabilities:
               drop:
                 - ALL
