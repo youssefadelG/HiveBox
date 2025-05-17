@@ -82,7 +82,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=hivebox
+            -Dsonar.projectKey=youssefadelG_HiveBox
+            -Dsonar.organization=${{ secrets.SONAR_ORG_KEY }}
             -Dsonar.host.url=https://sonarcloud.io
       # - name: SonarQube Quality Gate Check
       #   uses: SonarSource/sonarcloud-quality-gate-action@v1.0.0
