@@ -103,7 +103,7 @@ jobs:
         run: terrascan init
 
       - name: Run Terrascan on Kubernetes manifests
-        run: terrascan scan -d ./KIND -i k8s --repo-url https://github.com/youssefadelG/HiveBox.git --repo-ref ${{ github.ref_name }} -o json > terrascan-result.json
+        run: terrascan scan -d ./KIND -i k8s --repo-url https://github.com/youssefadelG/HiveBox.git --repo-ref ${{ github.ref_name }} -o json | tee terrascan-result.json
         continue-on-error: true
       
       - name: Fail if HIGH violations found
