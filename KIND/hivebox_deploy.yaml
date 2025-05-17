@@ -14,6 +14,7 @@ spec:
       labels:
         app: hivebox-app
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: hivebox-app
           image: youssefmahdy/hivebox-app@sha256:d64f04fdef085349b36a5e4c2327c7389c816364b3b54060668e3ae1755e2ef7
