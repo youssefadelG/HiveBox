@@ -94,13 +94,15 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v2
-      - name: Terrascan Initialization
+      - name: Install Terrascan
         run: |
-          terrascan init
+          curl -L https://github.com/tenable/terrascan/releases/latest/download/terrascan_linux_amd64.tar.gz | tar xz
+          sudo mv terrascan /usr/local/bin/
+
+      - name: Initialize Terrascan policies
+        run: terrascan init
+
       - name: Run Terrascan on Kubernetes manifests
-        uses: tenable/terrascan-action@v1.4.1
-        with:
-          iac_type: 'k8s'
-          iac_dir: './KIND'
+        run: terrascan scan -d ./KIND -i k8s --repo-url https://github.com/youssefadelG/HiveBox.git --repo-ref ${{ github.ref_name }}
 
       
