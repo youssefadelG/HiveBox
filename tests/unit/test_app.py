@@ -1,6 +1,7 @@
 import pytest
 import requests
 from app import launch_app
+import redis
 
 APP_VERSION = "v0.0.1"
 
