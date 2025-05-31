@@ -57,7 +57,7 @@ jobs:
           tags: |
             youssefmahdy/hivebox-app:latest
             youssefmahdy/hivebox-app:${{ github.ref_name }}
-            youssefmahdy/hivebox-app:${{ steps.meta.outputs.tags }}
+            ${{ steps.meta.outputs.tags }}
             youssefmahdy/hivebox-app:${{github.sha}}
 
       # - name: Set up OpenSSF ScoreCard
