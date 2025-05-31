@@ -2,6 +2,28 @@ from flask import Flask, jsonify
 import requests
 from datetime import datetime, timedelta, timezone
 from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
+import redis
+
+
+def get_redis_client():
+    """Create and return a Redis client"""
+    try:
+        client = redis.Redis(
+            host='valkey-service',
+            port=6379,
+            db=0,
+            decode_responses=True
+        )
+        client.set('status', 'HiveBox API is connected to Valkey!')
+        value = client.get('status')
+        if value:
+            print(f"Redis status: {value}")
+        else:
+            print("No status found in Redis.")
+        return client
+    except redis.ConnectionError as e:
+        print(f"Could not connect to Redis: {e}")
+        return None
 
 
 APP_VERSION = "v0.0.1"
@@ -34,6 +56,14 @@ def temp_status(temperature):
 
 def launch_app():
     app = Flask(__name__)
+
+    @app.route("/valkey-status")
+    def valkey_status():
+        value = get_redis_client().get('status')
+        if value:
+            return jsonify({"valkey_status": value})
+        else:
+            return jsonify({"valkey_status": "No status found"}), 404
 
     @app.route("/")
     def home():

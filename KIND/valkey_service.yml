@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: valkey-service
+spec:
+  selector:
+    app: valkey-app
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: valkey-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: valkey-app
+  template:
+    metadata:
+      labels:
+        app: valkey-app
+    spec:
+      containers:
+        - name: valkey-container
+          image: valkey/valkey:7.2.9
+          ports:
+            - containerPort: 6379
+          env:
+            - name: VALKEY_PORT
+              value: "6379"
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+          readinessProbe:
+            tcpSocket:
+              port: 6379
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 6379
+            initialDelaySeconds: 15
+            periodSeconds: 20
