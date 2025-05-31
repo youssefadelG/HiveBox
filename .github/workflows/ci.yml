@@ -48,13 +48,16 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: |
-            youssef_mahdy/hivebox-app
+            youssefmahdy/hivebox-app
 
       - name: Build and Push
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: youssef_mahdy/hivebox-app:v0.0.1,${{github.base_ref}},${{github.sha}}
+          tags: |
+            youssefmahdy/hivebox-app:v0.0.1
+            youssefmahdy/hivebox-app:${{github.base_ref}}
+            youssefmahdy/hivebox-app:${{github.sha}}
 
       # - name: Set up OpenSSF ScoreCard
       #   uses: openssf/scorecard-action@v1
