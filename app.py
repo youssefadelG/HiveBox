@@ -4,6 +4,7 @@ from datetime import datetime, timedelta, timezone
 from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
 import redis
 
+
 def get_redis_client():
     """Create and return a Redis client"""
     try:
